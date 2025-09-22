@@ -23,6 +23,23 @@ public class HomeController : Controller
         return View();
     }
 
+    [HttpGet]
+    public ViewResult RequestForm()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    public ViewResult RequestForm(EquipmentRequest request)
+    {
+        if (ModelState.IsValid)
+        {
+            Repository.AddRequest(request);
+            return View("Confirmation", request);
+        }
+        return View();
+    }
+
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {
