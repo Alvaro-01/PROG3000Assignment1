@@ -7,6 +7,8 @@ namespace Assignment1.Controllers;
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
+    public static int _requestId;
+
 
     public HomeController(ILogger<HomeController> logger)
     {
@@ -34,41 +36,37 @@ public class HomeController : Controller
     {
         if (ModelState.IsValid)
         {
+            request.Id = _requestId;
             Repository.AddRequest(request);
+            Console.WriteLine($"Request received: {request.Name}, {request.Email}, {request.Id}");
+            _requestId++;
             return View("Confirmation", request);
         }
         return View();
     }
-
+    
 
 
     public IActionResult AllEquipment()
     {
-        var equipmentList = new List<Equipment>
-        {
-            new Equipment { Id = 1, Type = "Laptop", Description = "Dell XPS 13", IsAvailable = true },
-            new Equipment { Id = 2, Type = "Projector", Description = "Epson EX3260", IsAvailable = false },
-            new Equipment { Id = 3, Type = "Camera", Description = "Canon EOS Rebel T7", IsAvailable = true },
-            new Equipment { Id = 4, Type = "Microphone", Description = "Blue Yeti USB Microphone", IsAvailable = true },
-            new Equipment { Id = 5, Type = "Tablet", Description = "iPad Pro 11-inch", IsAvailable = false }
-        };
+        var equipmentList = Repository.EquipmentList;
 
         return View(equipmentList);
     }
 
     public IActionResult AllAvailableEquipment()
     {
-        var equipmentList = new List<Equipment>
-        {
-            new Equipment { Id = 1, Type = "Laptop", Description = "Dell XPS 13", IsAvailable = true },
-            new Equipment { Id = 2, Type = "Projector", Description = "Epson EX3260", IsAvailable = false },
-            new Equipment { Id = 3, Type = "Camera", Description = "Canon EOS Rebel T7", IsAvailable = true },
-            new Equipment { Id = 4, Type = "Microphone", Description = "Blue Yeti USB Microphone", IsAvailable = true },
-            new Equipment { Id = 5, Type = "Tablet", Description = "iPad Pro 11-inch", IsAvailable = false }
-        };
+        var availableEquipment = Repository.EquipmentList.Where(e => e.IsAvailable).ToList();
 
-        return View(equipmentList);
+        return View(availableEquipment);
     }
+
+    public IActionResult Requests()
+    {
+        var requests = Repository.Requests;
+        return View(requests);
+    }
+
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {

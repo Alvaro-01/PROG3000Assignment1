@@ -1,0 +1,25 @@
+@model IEnumerable<Assignment1.Models.EquipmentRequest>;
+<h2>All Equipment Requests</h2>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Equipment Type</th>
+            <th>Name</th>
+            <th>Role</th>
+            <th>Accept</th>
+            <th>Decline</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Assignment1.Models.EquipmentRequest r in Model)
+        {
+            <tr>
+                <td>@r.EquipmentType</td>
+                <td>@r.Name</td>
+                <td>@r.Role</td>
+                <td><button class="btn btn-success">Accept</button></td>
+                <td><button class="btn btn-danger">Decline</button></td>
+
+            </tr>
+        }
+    </table>
