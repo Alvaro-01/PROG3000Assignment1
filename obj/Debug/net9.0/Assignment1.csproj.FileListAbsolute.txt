@@ -85,8 +85,6 @@ C:\Users\alvar\OneDrive\Desktop\PROG3000\Assignment1\Assignment1\obj\Debug\net9.
 C:\Users\alvar\OneDrive\Desktop\PROG3000\Assignment1\Assignment1\obj\Debug\net9.0\compressed\xn7lvt8hwd-muycvpuwrr.gz
 C:\Users\alvar\OneDrive\Desktop\PROG3000\Assignment1\Assignment1\obj\Debug\net9.0\compressed\l0r3ezt6fb-87fc7y1x7t.gz
 C:\Users\alvar\OneDrive\Desktop\PROG3000\Assignment1\Assignment1\obj\Debug\net9.0\compressed\6mczhzxmcq-mlv21k5csn.gz
-C:\Users\alvar\OneDrive\Desktop\PROG3000\Assignment1\Assignment1\obj\Debug\net9.0\compressed\ianhuy3cfn-y4q7my9885.gz
-C:\Users\alvar\OneDrive\Desktop\PROG3000\Assignment1\Assignment1\obj\Debug\net9.0\compressed\wc8dmx2kjg-y4q7my9885.gz
 C:\Users\alvar\OneDrive\Desktop\PROG3000\Assignment1\Assignment1\obj\Debug\net9.0\staticwebassets.build.json
 C:\Users\alvar\OneDrive\Desktop\PROG3000\Assignment1\Assignment1\obj\Debug\net9.0\staticwebassets.build.json.cache
 C:\Users\alvar\OneDrive\Desktop\PROG3000\Assignment1\Assignment1\obj\Debug\net9.0\staticwebassets.development.json
@@ -96,3 +94,5 @@ C:\Users\alvar\OneDrive\Desktop\PROG3000\Assignment1\Assignment1\obj\Debug\net9.
 C:\Users\alvar\OneDrive\Desktop\PROG3000\Assignment1\Assignment1\obj\Debug\net9.0\Assignment1.pdb
 C:\Users\alvar\OneDrive\Desktop\PROG3000\Assignment1\Assignment1\obj\Debug\net9.0\Assignment1.genruntimeconfig.cache
 C:\Users\alvar\OneDrive\Desktop\PROG3000\Assignment1\Assignment1\obj\Debug\net9.0\ref\Assignment1.dll
+C:\Users\alvar\OneDrive\Desktop\PROG3000\Assignment1\Assignment1\obj\Debug\net9.0\compressed\ianhuy3cfn-cnhkjjhqa4.gz
+C:\Users\alvar\OneDrive\Desktop\PROG3000\Assignment1\Assignment1\obj\Debug\net9.0\compressed\wc8dmx2kjg-cnhkjjhqa4.gz
