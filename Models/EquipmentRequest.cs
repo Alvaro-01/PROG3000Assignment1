@@ -9,11 +9,14 @@ public class EquipmentRequest
     [Required(ErrorMessage = "Please enter your name")]
     public string? Name { get; set; }
 
-    [Required(ErrorMessage = "Please enter a valid email address")]
+    [Required(ErrorMessage = "Please enter a valid email address"), EmailAddress(ErrorMessage = "Please enter a valid email address")]
     public string? Email { get; set; }
 
 
     [Required(ErrorMessage = "Please enter a valid phone number")]
+    [Phone(ErrorMessage = "Please enter a valid phone number")]
+    [MinLength(10, ErrorMessage = "Phone number must be at least 10 digits")]
+    [MaxLength(10, ErrorMessage = "Phone number cannot exceed 10 digits")]
     public string? Phone { get; set; }
 
     [Required(ErrorMessage = "Please enter a valid role")]
