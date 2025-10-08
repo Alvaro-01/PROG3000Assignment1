@@ -28,26 +28,7 @@
                 </select>
         </div>
 
-        <div>
-            <label asp-for="EquipmentType" class="form-label">Type of equipment:</label>
-                <select asp-for="EquipmentType" class="form-select">
-                <option value="">Select equipment type</option>
-                <option value="Laptop">Laptop</option>
-                <option value="Phone">Phone</option>
-                <option value="Tablet">Tablet</option>
-                <option value="Another">Another</option>
-                </select>
-        </div>
-
-        <div>
-            <label asp-for="RequestDetails" class="form-label">Request Details:</label>
-            <textarea asp-for="RequestDetails" class="form-control"></textarea>
-        </div>
-
-        <div>
-            <label asp-for="Duration" class="form-label">Duration (days):</label>
-            <input asp-for="Duration" class="form-control" type="number" />
-        </div>
+        
         <button type="submit">Submit Request</button>
     </form>
 

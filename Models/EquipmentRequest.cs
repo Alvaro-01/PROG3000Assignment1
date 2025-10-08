@@ -1,9 +1,22 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 namespace Assignment1.Models;
 
+public enum RequestStatus
+{
+    Pending,
+    Accepted,
+    Denied
+}
+
+
+public enum UserRole{
+    Student,
+    Professor
+}
 public class EquipmentRequest
 {
-
+    [Key]
     public int Id { get; set; }
 
     [Required(ErrorMessage = "Please enter your name")]
@@ -20,17 +33,20 @@ public class EquipmentRequest
     public string? Phone { get; set; }
 
     [Required(ErrorMessage = "Please enter a valid role")]
-    public string? Role { get; set; }
+    public UserRole Role { get; set; }
 
-    [Required(ErrorMessage = "Please enter a valid equipment type")]
-    public string? EquipmentType { get; set; }
+    [Required]
+    [Range(1, int.MaxValue, ErrorMessage = "Duration must be greater than 0")]
+    public int? DurationDays { get; set; }
 
-    [Required(ErrorMessage = "Please enter request details")]
-    public string? RequestDetails { get; set; }
+    [Required(ErrorMessage = "Please select equipment")]
+    [ForeignKey("Equipment")]
+    public int? EquipmentId { get; set; }
 
-    
-    [Required(ErrorMessage = "Please enter a valid duration"), Range(1, 365, ErrorMessage = "Duration must be between 1 and 365 days")]
-    public int? Duration { get; set; }
+    public RequestStatus Status { get; set; } = RequestStatus.Pending;
 
-    
+    [Required]
+    public DateTime CreatedAt { get; set; } = DateTime.Now;
+
+
 }

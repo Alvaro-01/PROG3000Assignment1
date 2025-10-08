@@ -36,11 +36,7 @@ public class HomeController : Controller
     {
         if (ModelState.IsValid)
         {
-            request.Id = _requestId;
-            Repository.AddRequest(request);
-            Console.WriteLine($"Request received: {request.Name}, {request.Email}, {request.Id}");
-            _requestId++;
-            return View("Confirmation", request);
+            
         }
         return View();
     }
@@ -49,22 +45,17 @@ public class HomeController : Controller
 
     public IActionResult AllEquipment()
     {
-        var equipmentList = Repository.EquipmentList;
-
-        return View(equipmentList);
+        return View();
     }
 
     public IActionResult AllAvailableEquipment()
     {
-        var availableEquipment = Repository.EquipmentList.Where(e => e.IsAvailable).ToList();
-
-        return View(availableEquipment);
+        return View();
     }
 
     public IActionResult Requests()
     {
-        var requests = Repository.Requests;
-        return View(requests);
+        return View();
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
