@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\alvar\\OneDrive\\Desktop\\PROG3000\\Assignment1\\Assignment1\\Assignment1.csproj": {}
+    "c:\\Users\\alvar\\OneDrive\\Desktop\\PROG3000\\Assignment1\\Assignment1\\Assignment1.csproj": {}
   },
   "projects": {
-    "C:\\Users\\alvar\\OneDrive\\Desktop\\PROG3000\\Assignment1\\Assignment1\\Assignment1.csproj": {
+    "c:\\Users\\alvar\\OneDrive\\Desktop\\PROG3000\\Assignment1\\Assignment1\\Assignment1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\alvar\\OneDrive\\Desktop\\PROG3000\\Assignment1\\Assignment1\\Assignment1.csproj",
+        "projectUniqueName": "c:\\Users\\alvar\\OneDrive\\Desktop\\PROG3000\\Assignment1\\Assignment1\\Assignment1.csproj",
         "projectName": "Assignment1",
-        "projectPath": "C:\\Users\\alvar\\OneDrive\\Desktop\\PROG3000\\Assignment1\\Assignment1\\Assignment1.csproj",
+        "projectPath": "c:\\Users\\alvar\\OneDrive\\Desktop\\PROG3000\\Assignment1\\Assignment1\\Assignment1.csproj",
         "packagesPath": "C:\\Users\\alvar\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\alvar\\OneDrive\\Desktop\\PROG3000\\Assignment1\\Assignment1\\obj\\",
+        "outputPath": "c:\\Users\\alvar\\OneDrive\\Desktop\\PROG3000\\Assignment1\\Assignment1\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\alvar\\AppData\\Roaming\\NuGet\\NuGet.Config"

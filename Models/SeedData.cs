@@ -4,58 +4,75 @@ namespace Assignment1.Models;
 
 public static class SeedData
 {
-    public static void EnsurePopulated(IApplicationBuilder app)
+    public static void Initialize(IServiceProvider serviceProvider)
     {
-        FastEquipmentContext context = app.ApplicationServices.
-            CreateScope().ServiceProvider
-            .GetRequiredService<FastEquipmentContext>();
-        context.Database.Migrate();
-
-        if (context.Database.GetPendingMigrations().Any())
+        using (var context = new FastEquipmentContext(
+            serviceProvider.GetRequiredService<
+                DbContextOptions<FastEquipmentContext>>()))
         {
-            context.Database.Migrate();
-        }
+            // Look for any equipment.
+            if (context.Equipments.Any() && context.EquipmentRequests.Any())
+            {
+                return;   // DB has been seeded
+            }
 
-        if (!context.Equipments.Any())
-        {
             context.Equipments.AddRange(
                 new Equipment
                 {
                     Type = EquipmentType.Laptop,
-                    Description = "Dell XPS 13, 16GB RAM, 512GB SSD",
+                    Description = "A portable computer.",
                     IsAvailable = true
                 },
                 new Equipment
                 {
                     Type = EquipmentType.Phone,
-                    Description = "iPhone 13 Pro, 128GB, Silver",
-                    IsAvailable = true
+                    Description = "A mobile device for communication.",
+                    IsAvailable = false
                 },
                 new Equipment
                 {
                     Type = EquipmentType.Tablet,
-                    Description = "iPad Air, 64GB, Space Gray",
-                    IsAvailable = false
+                    Description = "A handheld touchscreen device.",
+                    IsAvailable = true
                 },
+
                 new Equipment
                 {
                     Type = EquipmentType.Another,
-                    Description = "Samsung Galaxy Tab S7, 128GB, Black",
+                    Description = "Other types of equipment.",
                     IsAvailable = true
                 },
+
                 new Equipment
                 {
                     Type = EquipmentType.Laptop,
-                    Description = "MacBook Pro 14-inch, M1 Pro, 16GB RAM, 512GB SSD",
+                    Description = "A high-performance laptop for gaming.",
                     IsAvailable = false
                 },
                 new Equipment
                 {
                     Type = EquipmentType.Phone,
-                    Description = "Google Pixel 6, 128GB, Sorta Seafoam",
-                    IsAvailable = true
+                    Description = "A smartphone with a large display.",
+                    IsAvailable = false
                 }
             );
+
+            context.EquipmentRequests.AddRange(
+                new EquipmentRequest
+                {
+                    Name = "Alice Johnson",
+                    Email = "Alice@gmail.com",
+                    Phone = "1234567890",
+                    Role = UserRole.Student,
+                    EquipmentId = 1,
+                    DurationDays = 5,
+                    Status = RequestStatus.Pending,
+                    CreatedAt = DateTime.Now
+                }
+                
+            );
+
+
             context.SaveChanges();
         }
     }
