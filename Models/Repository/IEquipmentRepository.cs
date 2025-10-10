@@ -4,7 +4,7 @@ public interface IEquipmentRepository
 {
     IEnumerable<Equipment> GetAll();
 
-    Equipment GetAvailable(bool isAvailable);
+    IEnumerable<Equipment> GetAvailable(bool isAvailable);
     Equipment? FindById(int id);
 
     void Add(Equipment equipment);

@@ -16,9 +16,9 @@ public class EquipmentRepository : IEquipmentRepository
         return _context.Equipments.ToList();
     }
 
-    public Equipment GetAvailable(bool isAvailable)
+    public IEnumerable<Equipment> GetAvailable(bool isAvailable)
     {
-        return _context.Equipments.FirstOrDefault(e => e.IsAvailable == isAvailable);
+        return _context.Equipments.Where(e => e.IsAvailable == isAvailable).ToList();
     }
 
    

@@ -1,6 +1,8 @@
 @model Assignment1.Models.EquipmentRequest
 
+
 <h2>Equipment Request Form</h2>
+
 <div >
     <form asp-action="RequestForm" method="post">
         <div asp-validation-summary="All"></div>
@@ -28,8 +30,40 @@
                 </select>
         </div>
 
+            
+        <div>
+            <label asp-for="DurationDays" class="form-label">Enter duration of request (in days):</label>
+            <input asp-for="DurationDays" class="form-control" />
+        </div>
+
+        <div>
+            <label asp-for="EquipmentId" class="form-label">Type of equipment:</label>
+            <select asp-for="EquipmentId" class="form-select">
+                <option value="0">Select equipment</option>
+
+                @if (ViewBag.EquipmentList != null)
+                {
+                    @foreach (var equipment in ViewBag.EquipmentList)
+                    {
+                        <option value="@equipment.Id">@equipment.Type - @equipment.Description</option>
+                    }
+                }
+                else
+                {
+                    <option value="0">No equipment available</option>
+                }
+                
+            </select>
+        </div>
+        
         
         <button type="submit">Submit Request</button>
     </form>
 
+    @* <ul>
+        @foreach (var equipment in ViewBag.EquipmentList)
+        {
+            <li>@equipment.Type - @equipment.Description</li>
+        }
+    </ul> *@
 </div>

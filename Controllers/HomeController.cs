@@ -1,19 +1,29 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Assignment1.Models;
+using Assignment1.Models.Repository;
 
 namespace Assignment1.Controllers;
 
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
-    public static int _requestId;
+    private readonly IEquipmentRepository _equipmentRepository;
+    private readonly IRequestRepository _requestRepository;
+
+    
 
 
-    public HomeController(ILogger<HomeController> logger)
+
+    public HomeController(ILogger<HomeController> logger, IEquipmentRepository equipmentRepository,
+    IRequestRepository requestRepository)
     {
         _logger = logger;
+        _equipmentRepository = equipmentRepository;
+        _requestRepository = requestRepository;
+       
     }
+  
 
     public IActionResult Index()
     {
@@ -26,8 +36,12 @@ public class HomeController : Controller
     }
 
     [HttpGet]
-    public ViewResult RequestForm()
+    public IActionResult RequestForm()
+
     {
+        
+        ViewBag.EquipmentList = _equipmentRepository.GetAvailable(true);
+        
         return View();
     }
 
@@ -36,7 +50,10 @@ public class HomeController : Controller
     {
         if (ModelState.IsValid)
         {
-            
+            request.Status = RequestStatus.Pending;
+            request.CreatedAt = DateTime.Now;
+            _requestRepository.Add(request);
+            return View("Confirmation", request);
         }
         return View();
     }
@@ -45,12 +62,14 @@ public class HomeController : Controller
 
     public IActionResult AllEquipment()
     {
-        return View();
+        var equipmentList = _equipmentRepository.GetAll();
+        return View(equipmentList);
     }
 
     public IActionResult AllAvailableEquipment()
     {
-        return View();
+        var availableEquipment = _equipmentRepository.GetAvailable(true);
+        return View(availableEquipment);
     }
 
     public IActionResult Requests()
