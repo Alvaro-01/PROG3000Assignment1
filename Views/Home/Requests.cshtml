@@ -1,7 +1,12 @@
-@model IEnumerable<Assignment1.Models.EquipmentRequest>;
+@model IEnumerable<Assignment1.Models.EquipmentRequest>
+@using Assignment1.Models
+@{
+    var equipmentList = ViewBag.EquipmentList as List<Equipment>;
+}
+
 <h2>All Equipment Requests</h2>
-    <table class="table">
-        <thead>
+<table class="table">
+    <thead>
         <tr>
             <th>Equipment Type</th>
             <th>Name</th>
@@ -11,11 +16,28 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (Assignment1.Models.EquipmentRequest r in Model)
+        @foreach (EquipmentRequest request in Model.Where(r => r.Status == RequestStatus.Pending))
         {
+            Equipment? equipment = equipmentList?.FirstOrDefault(e => e.Id == request.EquipmentId);
             <tr>
-                
+                <td>@(equipment?.Type.ToString() ?? "Equipment unavailable or currently being used")</td>
+                <td>@request.Name</td>
+                <td>@request.Role</td>
+                <td>
+                    <form asp-action="AcceptRequest" method="post">
+                        <input type="hidden" name="id" value="@request.Id" />
+                        <button type="submit" class="btn btn-success">Accept</button>
+                    </form>
 
+                </td>
+                <td>
+                    <form asp-action="DeclineRequest" method="post">
+                        <input type="hidden" name="id" value="@request.Id" />
+                        <button type="submit" class="btn btn-danger">Decline</button>
+                    </form>
+
+                </td>
             </tr>
         }
-    </table>
+    </tbody>
+</table>

@@ -53,7 +53,7 @@ public static class SeedData
                 {
                     Type = EquipmentType.Phone,
                     Description = "A smartphone with a large display.",
-                    IsAvailable = false
+                    IsAvailable = true
                 }
             );
 

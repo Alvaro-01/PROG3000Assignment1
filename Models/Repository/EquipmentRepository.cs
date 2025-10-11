@@ -16,9 +16,16 @@ public class EquipmentRepository : IEquipmentRepository
         return _context.Equipments.ToList();
     }
 
+    
+
     public IEnumerable<Equipment> GetAvailable(bool isAvailable)
     {
         return _context.Equipments.Where(e => e.IsAvailable == isAvailable).ToList();
+    }
+
+    public IEnumerable<Equipment> GetEquipmentByType()
+    {
+        return _context.Equipments.OrderBy(e => e.Type).ToList();
     }
 
    

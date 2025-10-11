@@ -39,19 +39,21 @@
         <div>
             <label asp-for="EquipmentId" class="form-label">Type of equipment:</label>
             <select asp-for="EquipmentId" class="form-select">
-                <option value="0">Select equipment</option>
+                <option value="">Select equipment</option>
 
-                @if (ViewBag.EquipmentList != null)
+                @if (ViewBag.EquipmentList == null)
                 {
-                    @foreach (var equipment in ViewBag.EquipmentList)
-                    {
-                        <option value="@equipment.Id">@equipment.Type - @equipment.Description</option>
-                    }
+                    <option disabled>No equipment available at the moment</option>
                 }
                 else
                 {
-                    <option value="0">No equipment available</option>
-                }
+                    @foreach (dynamic equipment in ViewBag.EquipmentList)
+                    {
+                        <option value="@equipment.Id">@equipment.Type - @equipment.Description</option>
+                    }
+                }   
+
+               
                 
             </select>
         </div>

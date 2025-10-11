@@ -2,6 +2,7 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Assignment1.Models;
 using Assignment1.Models.Repository;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Assignment1.Controllers;
 
@@ -39,8 +40,8 @@ public class HomeController : Controller
     public IActionResult RequestForm()
 
     {
-        
-        ViewBag.EquipmentList = _equipmentRepository.GetAvailable(true);
+        var equipmentList = _equipmentRepository.GetAvailable(true);
+        ViewBag.EquipmentList = equipmentList ?? new List<Equipment>();
         
         return View();
     }
@@ -55,6 +56,8 @@ public class HomeController : Controller
             _requestRepository.Add(request);
             return View("Confirmation", request);
         }
+        var equipmentList = _equipmentRepository.GetAvailable(true);
+        ViewBag.EquipmentList = equipmentList ?? new List<Equipment>();
         return View();
     }
     
@@ -72,10 +75,58 @@ public class HomeController : Controller
         return View(availableEquipment);
     }
 
+    [HttpGet]
     public IActionResult Requests()
     {
-        return View();
+        var equipmentList = _equipmentRepository.GetAvailable(true);
+        ViewBag.EquipmentList = equipmentList ?? new List<Equipment>();
+        Console.WriteLine("Fetching all requests...");
+
+        var requests = _requestRepository.GetAll();
+        return View(requests);
+
     }
+
+    [HttpPost]
+    public IActionResult AcceptRequest(int id)
+    {
+        var request = _requestRepository.FindById(id);
+        if (request != null && request.Status == RequestStatus.Pending)
+        {
+
+            _requestRepository.UpdateStatus(request, RequestStatus.Accepted);
+
+            var equipment = _equipmentRepository.FindById(request.EquipmentId ?? 0);
+            if (equipment != null)
+            {
+                _equipmentRepository.Update(equipment, false);
+            }
+        }
+        return RedirectToAction("Requests");
+    }
+    
+    [HttpPost]
+    public IActionResult DeclineRequest(int id)
+    {
+        var request = _requestRepository.FindById(id);
+        if (request != null && request.Status == RequestStatus.Pending)
+        {
+
+            _requestRepository.UpdateStatus(request, RequestStatus.Denied);
+
+            var equipment = _equipmentRepository.FindById(request.EquipmentId ?? 0);
+            if (equipment != null)
+            {
+                _equipmentRepository.Update(equipment, true);
+            }
+        }
+        return RedirectToAction("Requests");
+    }
+
+
+
+
+
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
